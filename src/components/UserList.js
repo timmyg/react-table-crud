@@ -1,18 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function capitalizeFirstLetter(string) {
-  return string[0].toUpperCase() + string.slice(1).toLowerCase();
-}
-
-function toTitleCase(string) {
-  string = string.replace(/_/g, ' ');
-  return string
-    .split(' ')
-    .map((x) => capitalizeFirstLetter(x))
-    .join(' ');
-}
-
 // const UserList = ({ users }) => {
 class UserList extends React.Component {
   usersToDelete = [];
@@ -27,38 +15,50 @@ class UserList extends React.Component {
     console.log({ isChecked });
   }
 
+  capitalizeFirstLetter(string) {
+    return string[0].toUpperCase() + string.slice(1).toLowerCase();
+  }
+
+  toTitleCase(string) {
+    console.log({ string });
+    string = string.replace(/_/g, ' ');
+    return string
+      .split(' ')
+      .map((x) => this.capitalizeFirstLetter(x))
+      .join(' ');
+  }
+
   render() {
-    const rows = [];
-    const usersToDelete = [];
-    const { users } = this.props;
+    const UserRows = (props) => {
+      const rows = [];
+      for (var i = 0; i < props.users.length; i++) {
+        const user = props.users[i];
+        const { email } = user;
+        const rowCells = [];
+        rowCells.push(
+          <td key={`selected-${email}`}>
+            <input type="checkbox" onChange={this.handleDeleteToggle} />
+          </td>
+        );
+        rowCells.push(<td key={`email-${email}`}>{user.email}</td>);
+        rowCells.push(<td key={`name-${email}`}>{user.name}</td>);
+        rowCells.push(<td key={`role-${email}`}>{this.toTitleCase(user.role)}</td>);
+        rows.push(
+          <tr key={i} id={`${i}`}>
+            {rowCells}
+          </tr>
+        );
+      }
+      return rows;
+    };
 
-    for (var i = 0; i < users.length; i++) {
-      const user = users[i];
-      const { email: userId } = user;
-      const rowCells = [];
-      rowCells.push(
-        <td key={'selected' + userId}>
-          <input type="checkbox" onChange={this.handleDeleteToggle} />
-        </td>
-      );
-      rowCells.push(<td key={`email-${userId}`}>{user.email}</td>);
-      rowCells.push(<td key={`name-${userId}`}>{user.name}</td>);
-      rowCells.push(<td key={`role-${userId}`}>{toTitleCase(user.role)}</td>);
-
-      rows.push(
-        <tr key={i} id={`${i}`}>
-          {rowCells}
-        </tr>
-      );
-    }
-    console.log({ rows });
     return (
       <div className="container">
         <div>
           <header>Users</header>
           <button
-            disabled={!!usersToDelete.length ? '' : 'disabled'}
-            onClick={this.handleDeleteSubmit}
+          // disabled={!!usersToDelete.length ? '' : 'disabled'}
+          // onClick={this.handleDeleteSubmit}
           >
             Delete
           </button>
@@ -71,7 +71,7 @@ class UserList extends React.Component {
               <th>Name</th>
               <th>Role</th>
             </tr>
-            {rows}
+            <UserRows users={this.props.users} />
           </tbody>
         </table>
       </div>
@@ -79,8 +79,15 @@ class UserList extends React.Component {
   }
 }
 
-//   UserList.propTypes = {
-//     tagline: PropTypes.string,
-//   };
+UserList.propTypes = {
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      email: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      role: PropTypes.string.isRequired,
+    })
+  ),
+  addFish: PropTypes.func,
+};
 
 export default UserList;
