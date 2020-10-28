@@ -5,14 +5,19 @@ import { ApolloProvider, useQuery, useMutation } from '@apollo/react-hooks';
 import ApolloClient, { gql } from 'apollo-boost';
 
 const DELETE_USERS_MUTATION = gql`
-  mutation DeleteUsers($emails: [ID]!) {
-    deleteUsers(emails: $emails) {
-      email
-      name
-      role
-    }
+  mutation deleteUsers($emails: [ID]!) {
+    deleteUsers(emails: $emails)
   }
 `;
+// const DELETE_USERS_MUTATION = gql`
+//   mutation DeleteUsers($emails: [ID]!) {
+//     deleteUsers(emails: $emails) {
+//       email
+//       name
+//       role
+//     }
+//   }
+// `;
 
 // class UserList extends React.Component {
 const UserList = (props) => {
@@ -35,14 +40,14 @@ const UserList = (props) => {
     return rows;
   };
 
-  // console.log(props);
+  console.log(props.userEmailsSelected);
   return (
     <div className="container">
       <div>
         <header>Users</header>
         <button
           disabled={!!props.userEmailsSelected.length ? '' : 'disabled'}
-          onClick={(c) => deleteUsers({ variables: { type: ['input.value'] } })}
+          onClick={(c) => deleteUsers({ variables: { emails: props.userEmailsSelected } })}
         >
           Delete
         </button>
