@@ -3,7 +3,8 @@ import ApolloClient, { gql } from 'apollo-boost';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import env from './env';
-// import App from './App';
+import Router from './components/Router';
+// import App from './components/app';
 
 const client = new ApolloClient({
   uri: env.GRAPHQL_ENDPOINT,
@@ -26,8 +27,29 @@ const ALL_USERS_QUERY = gql`
   }
 `;
 
+const DELETE_USER_MUTATION = gql`
+  mutation DeleteUsers($emails: [ID]!) {
+    deleteUsers(emails: $emails) {
+      email
+      name
+      role
+    }
+  }
+`;
+
+// const UPDATE_USERS_MUTATION = gql`
+// mutation UpdateUser($emails: [ID]!) {
+//   updateUser(type: $type) {
+//     email
+//     name
+//     role
+//   }
+// }
+// `;
+
 const App = () => {
   const { loading, error, data } = useQuery(ALL_USERS_QUERY);
+  // const [deleteUsers, { data }]  = useMutation(DELETE_USER_MUTATION);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -37,11 +59,7 @@ const App = () => {
     return <p>Error: {JSON.stringify(error)}</p>;
   }
 
-  return (
-    <pre>
-      <code>{JSON.stringify(data, null, 2)}</code>
-    </pre>
-  );
+  return <Router users={data.allUsers} />;
 };
 
 const Root = () => (
