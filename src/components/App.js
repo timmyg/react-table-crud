@@ -1,4 +1,4 @@
-import { ApolloProvider, useQuery } from '@apollo/react-hooks';
+import { ApolloProvider, useQuery, useMutation } from '@apollo/react-hooks';
 import ApolloClient, { gql } from 'apollo-boost';
 import React from 'react';
 import env from '../env';
@@ -15,59 +15,43 @@ const client = new ApolloClient({
   },
 });
 
-const ALL_USERS_QUERY = gql`
-  query {
-    allUsers {
-      email
-      name
-      role
+class App extends React.Component {
+  state = {
+    userEmailsSelected: [],
+  };
+
+  deleteSelectedUsers = () => {
+    console.log('deleteSelectedUsers');
+  };
+
+  handleSelectedUser = (email, isSelected) => {
+    console.log(email, isSelected);
+    // console.log('handleSelectedUser');
+    // console.log('adding a fish', fish)
+    console.log(this.state);
+    let userEmailsSelected = [...this.state.userEmailsSelected];
+    console.log(userEmailsSelected);
+    // fishes[`fish${Date.now()}`] = fish;
+    if (isSelected) {
+      userEmailsSelected.push(email);
+    } else {
+      userEmailsSelected = userEmailsSelected.filter((e) => e !== email);
     }
+    this.setState({
+      userEmailsSelected,
+    });
+  };
+
+  render() {
+    return (
+      <Router
+        deleteSelectedUsers={this.deleteSelectedUsers}
+        handleSelectedUser={this.handleSelectedUser}
+        userEmailsSelected={this.state.userEmailsSelected}
+      />
+    );
   }
-`;
-
-const DELETE_USER_MUTATION = gql`
-  mutation DeleteUsers($emails: [ID]!) {
-    deleteUsers(emails: $emails) {
-      email
-      name
-      role
-    }
-  }
-`;
-
-// const UPDATE_USERS_MUTATION = gql`
-// mutation UpdateUser($emails: [ID]!) {
-//   updateUser(type: $type) {
-//     email
-//     name
-//     role
-//   }
-// }
-// `;
-
-// deleteUsers = (users) => {
-//   // 1. Take a copy of the existing state
-//   const fishes = { ...this.state.fishes };
-//   // 2. Add our new fish to that fishes variable
-//   fishes[`fish${Date.now()}`] = fish;
-//   // 3. Set the new fishes object to state
-//   this.setState({ fishes });
-// };
-
-const App = () => {
-  const { loading, error, data } = useQuery(ALL_USERS_QUERY);
-  // const [deleteUsers, { data }]  = useMutation(DELETE_USER_MUTATION);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {JSON.stringify(error)}</p>;
-  }
-
-  return <Router users={data.allUsers} />;
-};
+}
 
 const Root = () => (
   <ApolloProvider client={client}>
