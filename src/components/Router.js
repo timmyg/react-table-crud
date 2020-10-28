@@ -16,18 +16,9 @@ const ALL_USERS_QUERY = gql`
   }
 `;
 
-const DELETE_USER_MUTATION = gql`
-  mutation DeleteUsers($emails: [ID]!) {
-    deleteUsers(emails: $emails) {
-      email
-      name
-      role
-    }
-  }
-`;
-
 const Router = (props) => {
   const { loading, error, data } = useQuery(ALL_USERS_QUERY);
+  // const [deleteUsers, data2] = useMutation(DELETE_USERS_MUTATION);
   console.log({ loading, error, data });
 
   if (loading) {
@@ -48,7 +39,7 @@ const Router = (props) => {
           component={() => (
             <UserList
               users={data.allUsers}
-              deleteSelectedUsers={props.deleteSelectedUsers}
+              // deleteSelectedUsers={props.deleteUsers}
               userEmailsSelected={props.userEmailsSelected}
               handleSelectedUser={props.handleSelectedUser}
             />

@@ -25,13 +25,7 @@ class App extends React.Component {
   };
 
   handleSelectedUser = (email, isSelected) => {
-    console.log(email, isSelected);
-    // console.log('handleSelectedUser');
-    // console.log('adding a fish', fish)
-    console.log(this.state);
     let userEmailsSelected = [...this.state.userEmailsSelected];
-    console.log(userEmailsSelected);
-    // fishes[`fish${Date.now()}`] = fish;
     if (isSelected) {
       userEmailsSelected.push(email);
     } else {
