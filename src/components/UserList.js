@@ -9,20 +9,18 @@ const DELETE_USERS_MUTATION = gql`
     deleteUsers(emails: $emails)
   }
 `;
-// const DELETE_USERS_MUTATION = gql`
-//   mutation DeleteUsers($emails: [ID]!) {
-//     deleteUsers(emails: $emails) {
-//       email
-//       name
-//       role
-//     }
-//   }
-// `;
+
+const RESET_USERS_MUTATION = gql`
+  mutation resetUsers {
+    resetUsers
+  }
+`;
 
 // class UserList extends React.Component {
 const UserList = (props) => {
   // render() {
   const [deleteUsers, data2] = useMutation(DELETE_USERS_MUTATION);
+  const [resetUsers] = useMutation(RESET_USERS_MUTATION);
 
   const UserRows = (userRowsProps) => {
     const rows = [];
@@ -40,6 +38,10 @@ const UserList = (props) => {
     return rows;
   };
 
+  // const resetClick = function (e) {
+  //   resetUsers()
+  // };
+
   console.log(props.userEmailsSelected);
   return (
     <div className="container">
@@ -50,6 +52,9 @@ const UserList = (props) => {
           onClick={(c) => deleteUsers({ variables: { emails: props.userEmailsSelected } })}
         >
           Delete
+        </button>
+        <button type="button" onClick={resetUsers}>
+          Reset
         </button>
       </div>
       <table>
