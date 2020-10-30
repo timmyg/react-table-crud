@@ -1,26 +1,47 @@
 import React from 'react';
+import { useUsers } from '../hooks/users';
 import PropTypes from 'prop-types';
 import UserRow from './UserRow';
-import { ApolloProvider, useQuery, useMutation } from '@apollo/react-hooks';
-import ApolloClient, { gql } from 'apollo-boost';
+// import { ApolloProvider, useQuery, useMutation } from '@apollo/react-hooks';
+// import ApolloClient, { gql } from 'apollo-boost';
 
-const DELETE_USERS_MUTATION = gql`
-  mutation deleteUsers($emails: [ID]!) {
-    deleteUsers(emails: $emails)
-  }
-`;
+// const DELETE_USERS_MUTATION = gql`
+//   mutation deleteUsers($emails: [ID]!) {
+//     deleteUsers(emails: $emails)
+//   }
+// `;
 
-const RESET_USERS_MUTATION = gql`
-  mutation resetUsers {
-    resetUsers
-  }
-`;
+// const RESET_USERS_MUTATION = gql`
+//   mutation resetUsers {
+//     resetUsers
+//   }
+// `;
 
 // class UserList extends React.Component {
 const UserList = (props) => {
   // render() {
-  const [deleteUsers, data2] = useMutation(DELETE_USERS_MUTATION);
-  const [resetUsers] = useMutation(RESET_USERS_MUTATION);
+  // const [deleteUsers, data2] = useMutation(DELETE_USERS_MUTATION);
+  // const [resetUsers] = useMutation(RESET_USERS_MUTATION);
+  const {
+    getAll: { loading, error, data, refetch },
+    delete: [deleteUsers],
+    reset: [resetUsers],
+  } = useUsers();
+
+  const handleReset = async () => {
+    await resetUsers();
+  };
+
+  const handleDelete = async () => {
+    // (c) => deleteUsers({ variables: { emails: props.userEmailsSelected } })
+    // await deleteUsers;
+    await deleteUsers({
+      variables: {
+        emails: props.userEmailsSelected,
+      },
+    });
+    await refetch();
+  };
 
   const UserRows = (userRowsProps) => {
     const rows = [];
@@ -42,18 +63,18 @@ const UserList = (props) => {
   //   resetUsers()
   // };
 
-  console.log(props.userEmailsSelected);
+  // console.log(props.userEmailsSelected);
   return (
     <div className="container">
       <div>
         <header>Users</header>
         <button
           disabled={!!props.userEmailsSelected.length ? '' : 'disabled'}
-          onClick={(c) => deleteUsers({ variables: { emails: props.userEmailsSelected } })}
+          onClick={handleDelete}
         >
           Delete
         </button>
-        <button type="button" onClick={resetUsers}>
+        <button type="button" onClick={handleReset}>
           Reset
         </button>
       </div>
