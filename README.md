@@ -3,6 +3,7 @@
 #### running locally
 
 - add environment variables to `.env` in root, not `env.js`
+- `npm start`
 
 # React Table CRUD evaluation (original instructions)
 
