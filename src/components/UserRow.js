@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class UserRow extends React.Component {
   userIdsToDelete = [];
@@ -18,13 +19,10 @@ class UserRow extends React.Component {
 
   handleSelected = (event) => {
     const isChecked = event.currentTarget.checked;
-    // console.log(this.props.user.email, isChecked);
-    console.log(this.props);
     this.props.handleSelectedUser(this.props.user.email, isChecked);
   };
 
   render() {
-    // const user = props.users[i];
     const { user } = this.props;
     const { email } = user;
     const rowCells = [];
@@ -37,12 +35,14 @@ class UserRow extends React.Component {
         />
       </td>
     );
-    rowCells.push(<td key={`email-${email}`}>{user.email}</td>);
+    rowCells.push(
+      <td key={`email-${email}`}>
+        <Link to={`/users/${email}`}>{email}</Link>
+      </td>
+    );
     rowCells.push(<td key={`name-${email}`}>{user.name}</td>);
     rowCells.push(<td key={`role-${email}`}>{this.toTitleCase(user.role)}</td>);
     return <tr key={`row-${email}`}>{rowCells}</tr>;
-    // rows.push(<tr key={i}>{rowCells}</tr>);
-    // return rows;
   }
 }
 

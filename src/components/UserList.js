@@ -2,26 +2,8 @@ import React from 'react';
 import { useUsers } from '../hooks/users';
 import PropTypes from 'prop-types';
 import UserRow from './UserRow';
-// import { ApolloProvider, useQuery, useMutation } from '@apollo/react-hooks';
-// import ApolloClient, { gql } from 'apollo-boost';
 
-// const DELETE_USERS_MUTATION = gql`
-//   mutation deleteUsers($emails: [ID]!) {
-//     deleteUsers(emails: $emails)
-//   }
-// `;
-
-// const RESET_USERS_MUTATION = gql`
-//   mutation resetUsers {
-//     resetUsers
-//   }
-// `;
-
-// class UserList extends React.Component {
 const UserList = (props) => {
-  // render() {
-  // const [deleteUsers, data2] = useMutation(DELETE_USERS_MUTATION);
-  // const [resetUsers] = useMutation(RESET_USERS_MUTATION);
   const {
     getAll: { loading, error, data, refetch },
     delete: [deleteUsers],
@@ -30,11 +12,10 @@ const UserList = (props) => {
 
   const handleReset = async () => {
     await resetUsers();
+    await refetch();
   };
 
   const handleDelete = async () => {
-    // (c) => deleteUsers({ variables: { emails: props.userEmailsSelected } })
-    // await deleteUsers;
     await deleteUsers({
       variables: {
         emails: props.userEmailsSelected,
@@ -58,12 +39,6 @@ const UserList = (props) => {
     }
     return rows;
   };
-
-  // const resetClick = function (e) {
-  //   resetUsers()
-  // };
-
-  // console.log(props.userEmailsSelected);
   return (
     <div className="container">
       <div>
@@ -91,7 +66,6 @@ const UserList = (props) => {
       </table>
     </div>
   );
-  // }
 };
 
 UserList.propTypes = {

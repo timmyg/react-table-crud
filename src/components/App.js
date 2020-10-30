@@ -1,5 +1,5 @@
-import { ApolloProvider, useQuery, useMutation } from '@apollo/react-hooks';
-import ApolloClient, { gql } from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
+import ApolloClient from 'apollo-boost';
 import React from 'react';
 import env from '../env';
 import Router from './Router';
@@ -20,9 +20,9 @@ class App extends React.Component {
     userEmailsSelected: [],
   };
 
-  deleteSelectedUsers = () => {
-    console.log('deleteSelectedUsers');
-  };
+  // deleteSelectedUsers = () => {
+  //   console.log('deleteSelectedUsers');
+  // };
 
   handleSelectedUser = (email, isSelected) => {
     let userEmailsSelected = [...this.state.userEmailsSelected];
@@ -39,7 +39,7 @@ class App extends React.Component {
   render() {
     return (
       <Router
-        deleteSelectedUsers={this.deleteSelectedUsers}
+        // deleteSelectedUsers={this.deleteSelectedUsers}
         handleSelectedUser={this.handleSelectedUser}
         userEmailsSelected={this.state.userEmailsSelected}
       />

@@ -1,25 +1,14 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { ApolloProvider, useQuery, useMutation } from '@apollo/react-hooks';
-import ApolloClient, { gql } from 'apollo-boost';
 import NotFound from './NotFound';
 import UserDetail from './UserDetail';
 import UserList from './UserList';
 import React from 'react';
-
-const ALL_USERS_QUERY = gql`
-  query {
-    allUsers {
-      email
-      name
-      role
-    }
-  }
-`;
+import { useUsers } from '../hooks/users';
 
 const Router = (props) => {
-  const { loading, error, data } = useQuery(ALL_USERS_QUERY);
-  // const [deleteUsers, data2] = useMutation(DELETE_USERS_MUTATION);
-  console.log({ loading, error, data });
+  const {
+    getAll: { loading, error, data },
+  } = useUsers();
 
   if (loading) {
     return <p>Loading...</p>;
@@ -29,7 +18,6 @@ const Router = (props) => {
     return <p>Error: {JSON.stringify(error)}</p>;
   }
 
-  console.log(props);
   return (
     <BrowserRouter>
       <Switch>
@@ -39,13 +27,24 @@ const Router = (props) => {
           component={() => (
             <UserList
               users={data.allUsers}
-              // deleteSelectedUsers={props.deleteUsers}
               userEmailsSelected={props.userEmailsSelected}
               handleSelectedUser={props.handleSelectedUser}
             />
           )}
         />
-        <Route path="/user/:userId" component={UserDetail} />
+        <Route
+          path="/users/:email"
+          render={(props) => (
+            <UserDetail
+              user={data.allUsers.find((u) => u.email === props.match.params.email)}
+              // user={() => {
+              //   console.log({ data, props });
+              //   const x = data.allUsers.find((u) => u.email === props.match.email);
+              //   return x;
+              // }}
+            />
+          )}
+        />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
