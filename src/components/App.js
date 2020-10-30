@@ -14,16 +14,10 @@ const client = new ApolloClient({
   },
 });
 
-class App extends React.Component {
-  render() {
-    return <Router />;
-  }
-}
-
-const Root = () => (
+const App = () => (
   <ApolloProvider client={client}>
-    <App />
+    <Router />
   </ApolloProvider>
 );
 
-export default Root;
+export default App;

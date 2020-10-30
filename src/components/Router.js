@@ -5,7 +5,7 @@ import UserList from './UserList';
 import React from 'react';
 import { useUsers } from '../hooks/users';
 
-const Router = (props) => {
+const Router = () => {
   const {
     getAll: { loading, error, data },
   } = useUsers();
@@ -21,17 +21,7 @@ const Router = (props) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route
-          exact
-          path="/"
-          component={() => (
-            <UserList
-              users={data.allUsers}
-              // userEmailsSelected={props.userEmailsSelected}
-              // handleSelectedUser={props.handleSelectedUser}
-            />
-          )}
-        />
+        <Route exact path="/" component={() => <UserList users={data.allUsers} />} />
         <Route
           path="/users/:email"
           render={(props) => (

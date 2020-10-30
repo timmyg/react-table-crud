@@ -5,8 +5,8 @@ import { toTitleCase } from '../helpers';
 
 const UserDetail = (props) => {
   const {
-    getAll: { refetch },
-    update: [updateUser, { loading: updateSaving, error: updateError }],
+    getAll: { refetch, loading },
+    update: [updateUser, { loading: updateSaving }],
   } = useUsers();
   const [userRole, setUserRole] = useState(props.user.role);
   const [userName, setUserName] = useState(props.user.name);
@@ -34,7 +34,8 @@ const UserDetail = (props) => {
     history.push('/');
   };
 
-  console.log({ userRole });
+  const shouldDisable = updateSaving || loading;
+
   const getRoles = () => {
     const rows = [];
     ['ADMIN', 'DEVELOPER', 'APP_MANAGER', 'MARKETING', 'SALES'].map((role) => {
@@ -46,6 +47,7 @@ const UserDetail = (props) => {
             value={role}
             checked={role === userRole}
             onChange={handleRoleChange}
+            disabled={shouldDisable ? 'disabled' : ''}
           />
           {toTitleCase(role)}
         </div>
@@ -58,13 +60,19 @@ const UserDetail = (props) => {
     <section>
       <div>
         <div>{userEmail}</div>
-        <button disabled={updateSaving ? 'disabled' : ''} onClick={handleSave}>
+        <button disabled={shouldDisable ? 'disabled' : ''} onClick={handleSave}>
           save
         </button>
       </div>
       <div>
         <div>
-          Name: <input type="text" value={userName} onChange={handleNameChange} />
+          Name:{' '}
+          <input
+            type="text"
+            value={userName}
+            onChange={handleNameChange}
+            disabled={shouldDisable ? 'disabled' : ''}
+          />
         </div>
         <div>
           Role

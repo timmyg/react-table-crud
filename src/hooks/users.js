@@ -35,7 +35,9 @@ export const useUsers = () => {
   `;
 
   return {
-    getAll: useQuery(ALL_USERS_QUERY),
+    getAll: useQuery(ALL_USERS_QUERY, {
+      notifyOnNetworkStatusChange: true,
+    }),
     update: useMutation(UPDATE_USER_MUTATION),
     delete: useMutation(DELETE_USERS_MUTATION),
     reset: useMutation(RESET_USERS_MUTATION),
