@@ -35,14 +35,7 @@ const Router = (props) => {
         <Route
           path="/users/:email"
           render={(props) => (
-            <UserDetail
-              user={data.allUsers.find((u) => u.email === props.match.params.email)}
-              // user={() => {
-              //   console.log({ data, props });
-              //   const x = data.allUsers.find((u) => u.email === props.match.email);
-              //   return x;
-              // }}
-            />
+            <UserDetail user={data.allUsers.find((u) => u.email === props.match.params.email)} />
           )}
         />
         <Route component={NotFound} />
