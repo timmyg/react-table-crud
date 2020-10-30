@@ -16,30 +16,8 @@ const client = new ApolloClient({
 });
 
 class App extends React.Component {
-  state = {
-    userEmailsSelected: [],
-  };
-
-  handleSelectedUser = (email, isSelected) => {
-    let userEmailsSelected = [...this.state.userEmailsSelected];
-    if (isSelected) {
-      userEmailsSelected.push(email);
-    } else {
-      userEmailsSelected = userEmailsSelected.filter((e) => e !== email);
-    }
-    this.setState({
-      userEmailsSelected,
-    });
-  };
-
   render() {
-    return (
-      <Router
-        // deleteSelectedUsers={this.deleteSelectedUsers}
-        handleSelectedUser={this.handleSelectedUser}
-        userEmailsSelected={this.state.userEmailsSelected}
-      />
-    );
+    return <Router />;
   }
 }
 

@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useUsers } from '../hooks/users';
 import PropTypes from 'prop-types';
 import UserRow from './UserRow';
 
 const UserList = (props) => {
-  console.log('hi');
   const {
     getAll: { refetch },
     delete: [deleteUsers],
     reset: [resetUsers],
   } = useUsers();
+  const [userEmailsSelected, setUserEmailsSelected] = useState([]);
 
   const handleReset = async () => {
     await resetUsers();
@@ -19,10 +19,20 @@ const UserList = (props) => {
   const handleDelete = async () => {
     await deleteUsers({
       variables: {
-        emails: props.userEmailsSelected,
+        emails: userEmailsSelected,
       },
     });
     await refetch();
+  };
+
+  const handleSelectedUser = (email, isSelected) => {
+    const userEmailsSelectedTemp = [...userEmailsSelected];
+    if (isSelected) {
+      userEmailsSelectedTemp.push(email);
+    } else {
+      userEmailsSelectedTemp = userEmailsSelectedTemp.filter((e) => e !== email);
+    }
+    setUserEmailsSelected(userEmailsSelectedTemp);
   };
 
   const UserRows = (userRowsProps) => {
@@ -33,8 +43,8 @@ const UserList = (props) => {
         <UserRow
           key={user.email}
           user={user}
-          handleSelectedUser={props.handleSelectedUser}
-          isSelected={props.userEmailsSelected.some((e) => e === user.email)}
+          handleSelectedUser={handleSelectedUser}
+          isSelected={userEmailsSelected.some((e) => e === user.email)}
         />
       );
     }
@@ -44,10 +54,7 @@ const UserList = (props) => {
     <div className="container">
       <div>
         <header>Users</header>
-        <button
-          disabled={!!props.userEmailsSelected.length ? '' : 'disabled'}
-          onClick={handleDelete}
-        >
+        <button disabled={!!userEmailsSelected.length ? '' : 'disabled'} onClick={handleDelete}>
           Delete
         </button>
         <button type="button" onClick={handleReset}>
