@@ -1,28 +1,28 @@
 import React from 'react';
-// import { useUsers } from '../hooks/users';
+import { useUsers } from '../hooks/users';
 import PropTypes from 'prop-types';
 import UserRow from './UserRow';
 
 const UserList = (props) => {
   console.log('hi');
-  // const {
-  //   getAll: { refetch },
-  //   delete: [deleteUsers],
-  //   reset: [resetUsers],
-  // } = useUsers();
+  const {
+    getAll: { refetch },
+    delete: [deleteUsers],
+    reset: [resetUsers],
+  } = useUsers();
 
   const handleReset = async () => {
-    // await resetUsers();
-    // await refetch();
+    await resetUsers();
+    await refetch();
   };
 
   const handleDelete = async () => {
-    // await deleteUsers({
-    //   variables: {
-    //     emails: props.userEmailsSelected,
-    //   },
-    // });
-    // await refetch();
+    await deleteUsers({
+      variables: {
+        emails: props.userEmailsSelected,
+      },
+    });
+    await refetch();
   };
 
   const UserRows = (userRowsProps) => {
