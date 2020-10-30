@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useUsers } from '../hooks/users';
+import { useUsers } from '../../hooks/users';
 import UserRow from './UserRow';
 
 const UserList = (props) => {

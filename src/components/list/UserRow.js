@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { toTitleCase } from '../helpers';
+import { toTitleCase } from '../../helpers';
 
 class UserRow extends React.Component {
   handleSelected = (event) => {

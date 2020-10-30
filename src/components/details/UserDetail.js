@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useUsers } from '../hooks/users';
+import { useUsers } from '../../hooks/users';
 import { useHistory } from 'react-router-dom';
-import { toTitleCase } from '../helpers';
+import { toTitleCase } from '../../helpers';
 
 const UserDetail = (props) => {
   const {
@@ -39,7 +39,7 @@ const UserDetail = (props) => {
   const getRoles = () => {
     const rows = [];
     ['ADMIN', 'DEVELOPER', 'APP_MANAGER', 'MARKETING', 'SALES'].map((role) => {
-      rows.push(
+      return rows.push(
         <div key={role}>
           <input
             type="radio"

@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NotFound from './NotFound';
-import UserDetail from './UserDetail';
-import UserList from './UserList';
+import UserDetail from './details/UserDetail';
+import UserList from './list/UserList';
 import React from 'react';
 import { useUsers } from '../hooks/users';
 
