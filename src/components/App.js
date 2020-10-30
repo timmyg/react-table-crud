@@ -1,15 +1,14 @@
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import React from 'react';
-import env from '../env';
 import Router from './Router';
 
 const client = new ApolloClient({
-  uri: env.GRAPHQL_ENDPOINT,
+  uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
   request: (operation) => {
     operation.setContext({
       headers: {
-        'x-api-key': env.GRAPHQL_API_KEY,
+        'x-api-key': process.env.REACT_APP_GRAPHQL_API_KEY,
       },
     });
   },

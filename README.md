@@ -1,5 +1,11 @@
 # React Table CRUD evaluation
 
+#### running locally
+
+- add environment variables to `.env` in root, not `env.js`
+
+# React Table CRUD evaluation (original instructions)
+
 - Fork this repository and build your solution in the fork. When you're done reach out to us with the link to your solution repository.
 
 - The starting point code in this repo queries a list of all users and puts them on the screen as JSON.
@@ -11,7 +17,7 @@
 ```js
 export default {
   GRAPHQL_ENDPOINT: '',
-  GRAPHQL_API_KEY: ''
+  GRAPHQL_API_KEY: '',
 };
 ```
 
