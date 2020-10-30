@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useUsers } from '../hooks/users';
+import { useHistory } from 'react-router-dom';
+import { toTitleCase } from '../helpers';
 
 const UserDetail = (props) => {
   const {
-    update: [updateUser],
+    getAll: { refetch },
+    update: [updateUser, { loading: updateSaving, error: updateError }],
   } = useUsers();
   const [userRole, setUserRole] = useState(props.user.role);
   const [userName, setUserName] = useState(props.user.name);
   const [userEmail] = useState(props.user.email);
+  const history = useHistory();
 
   const handleNameChange = (event) => {
     setUserName(event.currentTarget.value);
@@ -26,6 +30,8 @@ const UserDetail = (props) => {
         },
       },
     });
+    await refetch();
+    history.push('/');
   };
 
   console.log({ userRole });
@@ -40,8 +46,8 @@ const UserDetail = (props) => {
             value={role}
             checked={role === userRole}
             onChange={handleRoleChange}
-          />{' '}
-          <span>{role}</span>{' '}
+          />
+          {toTitleCase(role)}
         </div>
       );
     });
@@ -52,7 +58,9 @@ const UserDetail = (props) => {
     <section>
       <div>
         <div>{userEmail}</div>
-        <button onClick={handleSave}>save</button>
+        <button disabled={updateSaving ? 'disabled' : ''} onClick={handleSave}>
+          save
+        </button>
       </div>
       <div>
         <div>

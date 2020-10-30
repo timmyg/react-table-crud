@@ -20,10 +20,6 @@ class App extends React.Component {
     userEmailsSelected: [],
   };
 
-  // deleteSelectedUsers = () => {
-  //   console.log('deleteSelectedUsers');
-  // };
-
   handleSelectedUser = (email, isSelected) => {
     let userEmailsSelected = [...this.state.userEmailsSelected];
     if (isSelected) {

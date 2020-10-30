@@ -7,7 +7,7 @@ import { useUsers } from '../hooks/users';
 
 const Router = (props) => {
   const {
-    getAll: { loading, error, data },
+    getAll: { loading, error, data, refetch },
   } = useUsers();
 
   if (loading) {

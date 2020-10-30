@@ -1,22 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { toTitleCase } from '../helpers';
 
 class UserRow extends React.Component {
-  userIdsToDelete = [];
-
-  capitalizeFirstLetter(string) {
-    return string[0].toUpperCase() + string.slice(1).toLowerCase();
-  }
-
-  toTitleCase(string) {
-    string = string.replace(/_/g, ' ');
-    return string
-      .split(' ')
-      .map((x) => this.capitalizeFirstLetter(x))
-      .join(' ');
-  }
-
   handleSelected = (event) => {
     const isChecked = event.currentTarget.checked;
     this.props.handleSelectedUser(this.props.user.email, isChecked);
@@ -41,7 +28,7 @@ class UserRow extends React.Component {
       </td>
     );
     rowCells.push(<td key={`name-${email}`}>{user.name}</td>);
-    rowCells.push(<td key={`role-${email}`}>{this.toTitleCase(user.role)}</td>);
+    rowCells.push(<td key={`role-${email}`}>{toTitleCase(user.role)}</td>);
     return <tr key={`row-${email}`}>{rowCells}</tr>;
   }
 }
