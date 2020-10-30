@@ -27,8 +27,8 @@ const Router = (props) => {
           component={() => (
             <UserList
               users={data.allUsers}
-              userEmailsSelected={props.userEmailsSelected}
-              handleSelectedUser={props.handleSelectedUser}
+              // userEmailsSelected={props.userEmailsSelected}
+              // handleSelectedUser={props.handleSelectedUser}
             />
           )}
         />
