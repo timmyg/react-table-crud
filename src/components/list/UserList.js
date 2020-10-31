@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useUsers } from '../../hooks/users';
 import UserRow from './UserRow';
+import '../../styles/Table.css';
 
 const UserList = (props) => {
   const {
@@ -9,7 +10,6 @@ const UserList = (props) => {
     delete: [deleteUsers, { loading: deleting }],
     reset: [resetUsers],
   } = useUsers();
-  console.log(deleting);
   const [userEmailsSelected, setUserEmailsSelected] = useState([]);
 
   const handleReset = async () => {
@@ -27,12 +27,15 @@ const UserList = (props) => {
     await refetch();
   };
 
-  const handleSelectedUser = (email, isSelected) => {
+  const toggleSelectedUser = (email) => {
+    console.log({ email });
     let userEmailsSelectedTemp = [...userEmailsSelected];
-    if (isSelected) {
-      userEmailsSelectedTemp.push(email);
-    } else {
+    const alreadySelected = userEmailsSelectedTemp.some((e) => e === email);
+    console.log({ alreadySelected });
+    if (alreadySelected) {
       userEmailsSelectedTemp = userEmailsSelectedTemp.filter((e) => e !== email);
+    } else {
+      userEmailsSelectedTemp.push(email);
     }
     setUserEmailsSelected(userEmailsSelectedTemp);
   };
@@ -46,7 +49,7 @@ const UserList = (props) => {
           key={user.email}
           user={user}
           shouldDisable={deleting || loading}
-          handleSelectedUser={handleSelectedUser}
+          toggleSelectedUser={toggleSelectedUser}
           isSelected={userEmailsSelected.some((e) => e === user.email)}
         />
       );
@@ -55,18 +58,19 @@ const UserList = (props) => {
   };
   return (
     <div className="container">
-      <div>
-        <header>Users</header>
+      <header>
+        <h1>Users</h1>
         <button
           disabled={!!userEmailsSelected.length && !deleting ? '' : 'disabled'}
           onClick={handleDelete}
+          className="danger outline"
         >
           Delete
         </button>
-        <button type="button" onClick={handleReset}>
+        {/* <button type="button" onClick={handleReset}>
           Reset
-        </button>
-      </div>
+        </button> */}
+      </header>
       <table>
         <tbody>
           <tr>

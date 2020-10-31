@@ -2,6 +2,8 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import React from 'react';
 import Router from './Router';
+import '../styles/Global.css';
+import '../styles/Fonts.css';
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,

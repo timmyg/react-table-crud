@@ -24,3 +24,8 @@ TODOs
 - [ ] styling
 - [ ] setup vercel, w/ env vars
 - [ ] deploy with vercel
+
+?
+
+- font family provided doesnt include SF Pro but mockups are all in that font (included .ttf fonts in public folder in case but currently not used)
+- hover clickable/cursor?

@@ -3,14 +3,19 @@ import { Link } from 'react-router-dom';
 import { toTitleCase } from '../../helpers';
 
 class UserRow extends React.Component {
-  handleSelected = (event) => {
-    const isChecked = event.currentTarget.checked;
-    this.props.handleSelectedUser(this.props.user.email, isChecked);
+  onRowClick = (email) => {
+    this.props.toggleSelectedUser(email);
   };
+
+  // handleSelected = (event) => {
+  //   const isChecked = event.currentTarget.checked;
+  //   this.props.handleSelectedUser(this.props.user.email, isChecked);
+  // };
 
   render() {
     const { user } = this.props;
     const { email } = user;
+    const checkboxId = `checkbox-${email}`;
     const rowCells = [];
     rowCells.push(
       <td key={`selected-${email}`}>
@@ -19,6 +24,7 @@ class UserRow extends React.Component {
           defaultChecked={this.props.isSelected}
           onChange={this.handleSelected}
           disabled={this.props.shouldDisable ? 'disabled' : ''}
+          id={checkboxId}
         />
       </td>
     );
@@ -29,7 +35,16 @@ class UserRow extends React.Component {
     );
     rowCells.push(<td key={`name-${email}`}>{user.name}</td>);
     rowCells.push(<td key={`role-${email}`}>{toTitleCase(user.role)}</td>);
-    return <tr key={`row-${email}`}>{rowCells}</tr>;
+    return (
+      <tr
+        key={`row-${email}`}
+        onClick={() => {
+          this.onRowClick(email);
+        }}
+      >
+        {rowCells}
+      </tr>
+    );
   }
 }
 

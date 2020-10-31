@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useUsers } from '../../hooks/users';
 import { useHistory } from 'react-router-dom';
 import { toTitleCase } from '../../helpers';
+import './UserDetail.css';
 
 const UserDetail = (props) => {
   const {
@@ -39,17 +40,18 @@ const UserDetail = (props) => {
   const getRoles = () => {
     const rows = [];
     ['ADMIN', 'DEVELOPER', 'APP_MANAGER', 'MARKETING', 'SALES'].map((role) => {
+      const id = `radio-${role}`;
       return rows.push(
         <div key={role}>
           <input
             type="radio"
-            name="Admin"
+            id={id}
             value={role}
             checked={role === userRole}
             onChange={handleRoleChange}
             disabled={shouldDisable ? 'disabled' : ''}
           />
-          {toTitleCase(role)}
+          <label htmlFor={id}>{toTitleCase(role)}</label>
         </div>
       );
     });
@@ -58,14 +60,14 @@ const UserDetail = (props) => {
 
   return (
     <section>
-      <div>
-        <div>{userEmail}</div>
+      <header>
+        <h1>{userEmail}</h1>
         <button disabled={shouldDisable ? 'disabled' : ''} onClick={handleSave}>
           save
         </button>
-      </div>
-      <div>
-        <div>
+      </header>
+      <div className="details">
+        <section>
           Name:{' '}
           <input
             type="text"
@@ -73,11 +75,11 @@ const UserDetail = (props) => {
             onChange={handleNameChange}
             disabled={shouldDisable ? 'disabled' : ''}
           />
-        </div>
-        <div>
+        </section>
+        <section>
           Role
           {getRoles()}
-        </div>
+        </section>
       </div>
     </section>
   );

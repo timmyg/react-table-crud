@@ -1,0 +1,8 @@
+tr:hover {
+  background: #fafafa;
+  cursor: default;
+}
+
+a {
+  text-decoration: none;
+}

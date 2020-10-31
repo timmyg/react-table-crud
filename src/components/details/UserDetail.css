@@ -1,0 +1,7 @@
+.details {
+  display: flex;
+}
+
+.details section {
+  flex-grow: 1;
+}

@@ -1,0 +1,62 @@
+@font-face {
+  font-family: SFProDisplay;
+  src: local(SFProDisplay-Bold), url(/path/to/SFProDisplay-Bold.woff2) format('woff2'),
+    url(/path/to/SFProDisplay-Bold.woff) format('woff'),
+    url(/path/to/SFProDisplay-Bold.ttf) format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: SFProText;
+  src: local(SFProText-Regular), url(/path/to/SFProText-Regular.woff2) format('woff2'),
+    url(/path/to/SFProText-Regular.woff) format('woff'),
+    url(/path/to/SFProText-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: SFProText;
+  src: local(SFProText-Medium), url(/path/to/SFProText-Medium.woff2) format('woff2'),
+    url(/path/to/SFProText-Medium.woff) format('woff'),
+    url(/path/to/SFProText-Medium.ttf) format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+.Text-Style {
+  font-family: SFProDisplay;
+  font-size: 34px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.37px;
+  color: #000000;
+}
+
+.Text-Style-3 {
+  font-family: SFProText;
+  font-size: 13px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.14px;
+  color: #ffffff;
+}
+
+.Text-Style-2 {
+  font-family: SFProText;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.14px;
+  color: #333333;
+}
