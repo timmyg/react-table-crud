@@ -5,6 +5,10 @@
 - add environment variables to `.env` in root, not `env.js`
 - `npm start`
 
+#### demo
+
+- [view on vercel here](https://react-table-crud.vercel.app/)
+
 # React Table CRUD evaluation (original instructions)
 
 - Fork this repository and build your solution in the fork. When you're done reach out to us with the link to your solution repository.
