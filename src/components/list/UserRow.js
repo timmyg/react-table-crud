@@ -7,11 +7,6 @@ class UserRow extends React.Component {
     this.props.toggleSelectedUser(email);
   };
 
-  // handleSelected = (event) => {
-  //   const isChecked = event.currentTarget.checked;
-  //   this.props.handleSelectedUser(this.props.user.email, isChecked);
-  // };
-
   render() {
     const { user } = this.props;
     const { email } = user;

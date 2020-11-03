@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { useUsers } from '../../hooks/users';
 import UserRow from './UserRow';
 import '../../styles/Table.css';
@@ -60,11 +59,11 @@ const UserList = (props) => {
     <div className="container">
       <section>
         <header>
-          <h1 class="font-display">Users</h1>
+          <h1 className="font-display">Users</h1>
           <div className="action">
-            <button type="button" onClick={handleReset}>
+            {/* <button type="button" onClick={handleReset}>
               Reset
-            </button>
+            </button> */}
             <button
               disabled={!!userEmailsSelected.length && !deleting ? '' : 'disabled'}
               onClick={handleDelete}
@@ -78,9 +77,9 @@ const UserList = (props) => {
           <tbody>
             <tr>
               <th></th>
-              <th class="font-medium">Email</th>
-              <th class="font-medium">Name</th>
-              <th class="font-medium">Role</th>
+              <th className="font-medium">Email</th>
+              <th className="font-medium">Name</th>
+              <th className="font-medium">Role</th>
             </tr>
             <UserRows users={props.users} />
           </tbody>
