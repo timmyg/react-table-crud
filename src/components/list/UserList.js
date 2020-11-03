@@ -7,14 +7,14 @@ const UserList = (props) => {
   const {
     getAll: { refetch, loading },
     delete: [deleteUsers, { loading: deleting }],
-    reset: [resetUsers],
+    // reset: [resetUsers],
   } = useUsers();
   const [userEmailsSelected, setUserEmailsSelected] = useState([]);
 
-  const handleReset = async () => {
-    await resetUsers();
-    await refetch();
-  };
+  // const handleReset = async () => {
+  //   await resetUsers();
+  //   await refetch();
+  // };
 
   const handleDelete = async () => {
     await deleteUsers({
