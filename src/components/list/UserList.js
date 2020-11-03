@@ -90,15 +90,4 @@ const UserList = (props) => {
   );
 };
 
-UserList.propTypes = {
-  users: PropTypes.arrayOf(
-    PropTypes.shape({
-      email: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      role: PropTypes.string.isRequired,
-    })
-  ),
-  addFish: PropTypes.func,
-};
-
 export default UserList;
