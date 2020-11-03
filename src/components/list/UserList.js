@@ -27,10 +27,8 @@ const UserList = (props) => {
   };
 
   const toggleSelectedUser = (email) => {
-    console.log({ email });
     let userEmailsSelectedTemp = [...userEmailsSelected];
     const alreadySelected = userEmailsSelectedTemp.some((e) => e === email);
-    console.log({ alreadySelected });
     if (alreadySelected) {
       userEmailsSelectedTemp = userEmailsSelectedTemp.filter((e) => e !== email);
     } else {
