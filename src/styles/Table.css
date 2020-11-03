@@ -1,8 +1,44 @@
 tr:hover {
-  background: #fafafa;
+  background: var(--gray-light);
   cursor: default;
 }
 
 a {
   text-decoration: none;
+}
+
+table {
+  border-spacing: 0;
+  width: 100%;
+}
+
+td,
+th {
+  border-bottom: solid 1px var(--gray);
+}
+
+th {
+  border-top: solid 1px var(--gray);
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 14px 0;
+  text-align: left;
+}
+
+td {
+  padding: 9px 0;
+  font-size: 13px;
+}
+
+table tr > *:nth-child(1) {
+  width: 10%;
+}
+table tr > *:nth-child(2) {
+  width: 30%;
+}
+table tr > *:nth-child(3) {
+  width: 30%;
+}
+table tr > *:nth-child(4) {
+  width: 30%;
 }

@@ -58,30 +58,34 @@ const UserList = (props) => {
   };
   return (
     <div className="container">
-      <header>
-        <h1>Users</h1>
-        <button
-          disabled={!!userEmailsSelected.length && !deleting ? '' : 'disabled'}
-          onClick={handleDelete}
-          className="danger outline"
-        >
-          Delete
-        </button>
-        {/* <button type="button" onClick={handleReset}>
-          Reset
-        </button> */}
-      </header>
-      <table>
-        <tbody>
-          <tr>
-            <th></th>
-            <th>Email</th>
-            <th>Name</th>
-            <th>Role</th>
-          </tr>
-          <UserRows users={props.users} />
-        </tbody>
-      </table>
+      <section>
+        <header>
+          <h1 class="font-display">Users</h1>
+          <div className="action">
+            <button type="button" onClick={handleReset}>
+              Reset
+            </button>
+            <button
+              disabled={!!userEmailsSelected.length && !deleting ? '' : 'disabled'}
+              onClick={handleDelete}
+              className="danger outline"
+            >
+              Delete
+            </button>
+          </div>
+        </header>
+        <table>
+          <tbody>
+            <tr>
+              <th></th>
+              <th class="font-medium">Email</th>
+              <th class="font-medium">Name</th>
+              <th class="font-medium">Role</th>
+            </tr>
+            <UserRows users={props.users} />
+          </tbody>
+        </table>
+      </section>
     </div>
   );
 };

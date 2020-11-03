@@ -1,19 +1,29 @@
 :root {
   --red: #ee0000;
+  --blue: #0070c9;
+  --gray: #e5e5e5;
+  --gray-light: #fafafa;
 }
 
 html * {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell,
-    'Helvetica Neue', sans-serif;
+  font-family: SFProText, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu,
+    Cantarell, 'Helvetica Neue', sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.14px;
 }
 
 header {
   font-size: 34px;
+  padding-bottom: 14px;
 }
 
 button {
   padding: 6px 17px;
-  background: #0070c9;
+  background: var(--blue);
   border-radius: 4px;
   border: none;
   color: white;
@@ -37,8 +47,8 @@ button.outline.danger:not(:disabled) {
 input[type='text'] {
   width: 240px;
   height: 21px;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
-  border: solid 3.5px rgba(59, 153, 252, 0.5);
+  /* box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05); */
+  /* border: solid 3.5px rgba(59, 153, 252, 0.5); */
 }
 
 header {
@@ -50,4 +60,14 @@ header {
 h1 {
   font-size: 34px;
   margin: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+.action {
+  position: relative;
+  margin-top: 8px;
 }

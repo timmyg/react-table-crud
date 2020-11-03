@@ -1,7 +1,30 @@
+header {
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--gray);
+}
+
 .details {
   display: flex;
+  padding-top: 24px;
+}
+
+.details section:nth-of-type(2) {
+  border-left: 1px solid var(--gray);
 }
 
 .details section {
   flex-grow: 1;
+  flex-basis: 0;
+}
+
+.role {
+  margin-bottom: 11px;
+}
+
+.roles-wrapper {
+  padding-left: 23px;
+}
+
+.header {
+  padding-bottom: 10px;
 }
